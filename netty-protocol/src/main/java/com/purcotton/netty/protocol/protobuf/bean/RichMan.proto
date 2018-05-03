@@ -1,0 +1,36 @@
+syntax = "proto3";
+//使用proto3语法 没有指定这个，编译器会使用proto2
+
+package netty;  
+
+//java_package值得是该文件生成的java文件的包路径
+option java_package = "com.purcotton.netty.protocol.protobuf.bean";
+
+//java_outer_classname值的是生成的class的名称
+option java_outer_classname = "RichManProto";  
+
+//message和enum是它的基本类型，很类似于java的class和枚举
+//required表名这个字段是必须的，option表明这个字段可选，default表明这个字段有默认值
+//repeat表明这个字段可以重复，类似于java中的List，该例子中Car的声明中，就相当于java中的List<Car>
+//每个声明的后面的数字，例如1，2，3, 4等等，同级的声明不能重复
+message RichMan {  
+  
+   int32 id = 1;  
+   string name = 2;  
+   string email = 3;  
+     
+   enum CarType {  
+     AUDI = 0;  
+     BENZ = 1;  
+     LAMBORGHINI = 2;  
+     DASAUTO = 3;  
+   }  
+     
+   message Car {  
+      string name = 1;  
+      CarType type = 2;  
+   }  
+     
+   repeated Car cars = 4;  
+     
+}  

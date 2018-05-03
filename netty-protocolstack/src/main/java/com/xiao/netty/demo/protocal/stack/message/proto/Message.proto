@@ -1,0 +1,41 @@
+//使用proto3语法 没有指定这个，编译器会使用proto2
+syntax = "proto3";
+
+//java_package值得是该文件生成的java文件的包路径
+option java_package = "com.xiao.netty.demo.protocal.stack.message";
+
+
+//java_outer_classname值的是生成的class的名称
+option java_outer_classname = "NettyMessageProto";
+
+message NettyMessage{
+	// java int 必填选项
+	int32 magic = 1 ;
+	
+	// java long 消息ID
+	uint64 messageid = 2;
+	
+	// 枚举 消息类型
+	enum MessageType {
+	    //业务请求  proto3 从0开始
+	    REQ = 0;
+	    //业务响应
+	    RESP = 1;
+	    //即是请求也是响应
+	    SERVICE = 2;
+	    //握手请求
+	    SHAKE_HANDS_REQ = 3;
+	    //握手应答
+	    SHAKE_HANDS_RESP = 4;
+	    //心跳 ping
+	    PING = 5;
+	    //心跳PONG
+	    PONG = 6;
+	}
+	
+	// java int 消息类型
+	MessageType type = 3;
+	
+	// java string 消息内容  可选(心跳握手没有消息体)
+	string content = 4;
+}
